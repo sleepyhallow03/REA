@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REA Programación - 9no Grado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: var(--secondary);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--secondary);
+        }
+        
+        .hero {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .module-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .module-header i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .module-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .module-content {
+            padding: 25px;
+        }
+        
+        .module-content ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .module-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-content li:last-child {
+            border-bottom: none;
+        }
+        
+        .module-content li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .interactive-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .interactive-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .interactive-item {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+        
+        .interactive-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .interactive-item h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .interactive-item h4 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .interactive-item p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .forum {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .forum-form {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .forum-posts {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .post {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-author .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .post-author-info h5 {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .post-author-info small {
+            color: #777;
+        }
+        
+        .post-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .post-content {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .post-actions button {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .post-actions button:hover {
+            color: var(--secondary);
+        }
+        
+        .post-actions button i {
+            margin-right: 5px;
+        }
+        
+        .license {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 10px;
+        }
+        
+        .license a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .license a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+        /* Simulador de diagramas */
+        .flowchart-container {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            min-height: 300px;
+            position: relative;
+        }
+        
+        .flowchart-element {
+            position: absolute;
+            padding: 10px 15px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            cursor: move;
+            user-select: none;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .flowchart-element.terminal {
+            background: var(--accent);
+            border-radius: 50px;
+        }
+        
+        .flowchart-element.process {
+            background: var(--success);
+        }
+        
+        .flowchart-element.decision {
+            background: var(--warning);
+            transform: rotate(45deg);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Juego de memoria */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .memory-card {
+            height: 100px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+            background: var(--secondary);
+        }
+        
+        .memory-card.matched {
+            background: var(--success);
+            transform: scale(0.95);
+        }
+        
+        /* Ejercicios */
+        .exercise-container {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-question {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .exercise-options {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-option {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .exercise-option:hover {
+            background: #e0e0e0;
+        }
+        
+        .exercise-option.selected {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .exercise-result {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .exercise-result.correct {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .exercise-result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        /* Videos */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin: 5px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .interactive-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .memory-game {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <h1>REA: <span>Programación para 9no Grado</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#modulos">Módulos</a></li>
+                    <li><a href="#interactivos">Recursos</a></li>
+                    <li><a href="#foro">Foro</a></li>
+                    <li><a href="#licencia">Licencia</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sección Hero -->
+        <section class="hero">
+            <h2>Aprende los Conceptos Básicos de Programación</h2>
+            <p>Recurso Educativo Abierto diseñado para estudiantes de 9no grado que desean aprender los fundamentos de la programación de manera interactiva y práctica.</p>
+            <a href="#modulos" class="btn">Comenzar Aprendizaje</a>
+            <a href="#foro" class="btn btn-outline">Participar en el Foro</a>
+        </section>
+
+        <!-- Módulos Educativos -->
+        <section id="modulos" class="interactive-section">
+            <h2 class="section-title">Módulos de Aprendizaje</h2>
+            <div class="modules">
+                <!-- Módulo 1 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Módulo 1: Algoritmos</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Comprende qué es un algoritmo y su utilidad en la solución de problemas.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Definición de algoritmos</li>
+                            <li><i class="fas fa-check-circle"></i> Importancia en programación</li>
+                            <li><i class="fas fa-check-circle"></i> Ejemplos prácticos</li>
+                            <li><i class="fas fa-check-circle"></i> Ejercicios interactivos</li>
+                        </ul>
+                        <a href="#algoritmos" class="btn">Acceder al módulo</a>
+                    </div>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Módulo 2: Representación de Algoritmos</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Aprende a representar algoritmos mediante diagramas de flujo y pseudocódigo.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Diagramas de flujo</li>
+                            <li><i class="fas fa-check-circle"></i> Pseudocódigo</li>
+                            <li><i class="fas fa-check-circle"></i> Simulador interactivo</li>
+                            <li><i class="fas fa-check-circle"></i> Comparación de métodos</li>
+                        </ul>
+                        <a href="#diagramas" class="btn">Acceder al módulo</a>
+                    </div>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Módulo 3: Lenguajes de Programación</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Conoce los diferentes lenguajes de programación y sus funciones básicas.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Qué es un lenguaje de programación</li>
+                            <li><i class="fas fa-check-circle"></i> Lenguajes más utilizados</li>
+                            <li><i class="fas fa-check-circle"></i> Infografía interactiva</li>
+                            <li><i class="fas fa-check-circle"></i> Casos de uso</li>
+                        </ul>
+                        <a href="#lenguajes" class="btn">Acceder al módulo</a>
+                    </div>
+                </div>
+
+                <!-- Módulo 4 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Módulo 4: Tipos de Lenguajes</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Distinguir los diferentes tipos de lenguajes y sus aplicaciones prácticas.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Alto nivel vs bajo nivel</li>
+                            <li><i class="fas fa-check-circle"></i> Interpretados vs compilados</li>
+                            <li><i class="fas fa-check-circle"></i> Juego de emparejamiento</li>
+                            <li><i class="fas fa-check-circle"></i> Ejemplos prácticos</li>
+                        </ul>
+                        <a href="#tipos" class="btn">Acceder al módulo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos Interactivos -->
+        <section id="interactivos" class="interactive-section">
+            <h2 class="section-title">Recursos Interactivos</h2>
+            <div class="interactive-content">
+                <!-- Simulador de Diagramas de Flujo -->
+                <div class="interactive-item" id="diagramas">
+                    <h4><i class="fas fa-sim-card"></i> Simulador de Diagramas de Flujo</h4>
+                    <p>Crea tus propios diagramas de flujo arrastrando y soltando elementos. Ideal para representar algoritmos de manera visual.</p>
+                    
+                    <div class="flowchart-container" id="flowchart-simulator">
+                        <div class="flowchart-element terminal" style="top: 20px; left: 50%; transform: translateX(-50%);" draggable="true">Inicio</div>
+                        <div class="flowchart-element process" style="top: 100px; left: 50%; transform: translateX(-50%);" draggable="true">Proceso</div>
+                        <div class="flowchart-element decision" style="top: 180px; left: 50%; transform: translateX(-50%) rotate(45deg);" draggable="true">Decisión</div>
+                        <div class="flowchart-element terminal" style="top: 260px; left: 50%; transform: translateX(-50%);" draggable="true">Fin</div>
+                    </div>
+                    
+                    <div class="flowchart-controls">
+                        <button class="btn" onclick="addElement('process')">Añadir Proceso</button>
+                        <button class="btn" onclick="addElement('decision')">Añadir Decisión</button>
+                        <button class="btn" onclick="resetSimulator()">Reiniciar</button>
+                    </div>
+                </div>
+                
+                <!-- Juego de Emparejamiento -->
+                <div class="interactive-item" id="tipos">
+                    <h4><i class="fas fa-gamepad"></i> Juego de Emparejamiento</h4>
+                    <p>Juego tipo memoria para asociar tipos de lenguajes de programación con ejemplos y características.</p>
+                    
+                    <div class="memory-game" id="memory-game">
+                        <!-- Las cartas se generarán con JavaScript -->
+                    </div>
+                    
+                    <div class="game-info">
+                        <p>Pares encontrados: <span id="pairs-matched">0</span>/8</p>
+                        <button class="btn" onclick="startGame()">Comenzar Juego</button>
+                    </div>
+                </div>
+                
+                <!-- Videos Explicativos -->
+                <div class="interactive-item" id="lenguajes">
+                    <h4><i class="fas fa-video"></i> Videos Explicativos</h4>
+                    <p>Accede a nuestra colección de videos educativos que explican conceptos clave de programación.</p>
+                    
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/EGQh5SZctaE" title="¿Qué es un algoritmo?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    
+                    <div class="video-links">
+                        <h5>Más videos:</h5>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=z95mZVUcJ-E" target="_blank">Diagramas de flujo</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=VfGw0BQk-eA" target="_blank">Introducción a Python</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=Qp2H3G8ibqg" target="_blank">Lenguajes compilados vs interpretados</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Ejercicios Prácticos -->
+                <div class="interactive-item" id="algoritmos">
+                    <h4><i class="fas fa-tasks"></i> Ejercicios Prácticos</h4>
+                    <p>Resuelve ejercicios interactivos para cada módulo y fortalece tu comprensión de los conceptos.</p>
+                    
+                    <div class="exercise-container">
+                        <div class="exercise-question">
+                            1. ¿Cuál de las siguientes opciones es la mejor definición de un algoritmo?
+                        </div>
+                        <div class="exercise-options">
+                            <div class="exercise-option" data-correct="false">A) Un programa de computadora</div>
+                            <div class="exercise-option" data-correct="true">B) Un conjunto de pasos ordenados para resolver un problema</div>
+                            <div class="exercise-option" data-correct="false">C) Un lenguaje de programación</div>
+                            <div class="exercise-option" data-correct="false">D) Un diagrama de flujo</div>
+                        </div>
+                        <div class="exercise-result"></div>
+                    </div>
+                    
+                    <div class="exercise-container">
+                        <div class="exercise-question">
+                            2. ¿Qué figura se utiliza en un diagrama de flujo para representar una decisión?
+                        </div>
+                        <div class="exercise-options">
+                            <div class="exercise-option" data-correct="false">A) Rectángulo</div>
+                            <div class="exercise-option" data-correct="true">B) Rombo</div>
+                            <div class="exercise-option" data-correct="false">C) Óvalo</div>
+                            <div class="exercise-option" data-correct="false">D) Flecha</div>
+                        </div>
+                        <div class="exercise-result"></div>
+                    </div>
+                    
+                    <button class="btn" onclick="checkAnswers()">Verificar Respuestas</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Foro Colaborativo -->
+        <section id="foro" class="forum">
+            <h2 class="section-title">Foro de Aprendizaje Colaborativo</h2>
+            
+            <div class="forum-form">
+                <h3>Publica tu pregunta o comentario</h3>
+                <form id="forum-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modulo">Módulo relacionado</label>
+                        <select id="modulo" required>
+                            <option value="">Selecciona un módulo</option>
+                            <option value="1">Algoritmos</option>
+                            <option value="2">Representación de Algoritmos</option>
+                            <option value="3">Lenguajes de Programación</option>
+                            <option value="4">Tipos de Lenguajes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" placeholder="Escribe tu pregunta, comentario o aporte..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Publicar Mensaje</button>
+                </form>
+            </div>
+            
+            <div class="forum-posts" id="forum-posts">
+                <!-- Las publicaciones se generarán con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Licencia -->
+        <section id="licencia" class="license">
+            <h3>Licencia Creative Commons</h3>
+            <p>Este recurso educativo abierto está publicado bajo la licencia <strong>CC BY-NC 4.0</strong></p>
+            <p>Esto significa que puedes compartir, adaptar y redistribuir este material siempre que:</p>
+            <p>- Des el crédito apropiado al autor original</p>
+            <p>- No uses el material con fines comerciales</p>
+            <p>Más información: <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" target="_blank">https://creativecommons.org/licenses/by-nc/4.0/deed.es</a></p>
+        </section>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>Recurso Educativo Abierto (REA) - Programación para 9no Grado &copy; 2025</p>
+        <p>Desarrollado por Alejandro Díaz Miranda - Universidad de Ciencias Pedagógicas "Enrique José Varona"</p>
+    </footer>
+
+    <script>
+        // Datos para el juego de memoria
+        const memoryCards = [
+            { type: "Alto nivel", content: "Python, Java, C++" },
+            { type: "Bajo nivel", content: "Ensamblador, C" },
+            { type: "Compilado", content: "C, C++, Rust" },
+            { type: "Interpretado", content: "Python, JavaScript, Ruby" },
+            { type: "Orientado a objetos", content: "Java, C#, Python" },
+            { type: "Funcional", content: "Haskell, Lisp, Erlang" },
+            { type: "Scripting", content: "JavaScript, PHP, Perl" },
+            { type: "Multiparadigma", content: "Python, JavaScript, Scala" }
+        ];
+
+        // Datos de ejemplo para el foro
+        let forumPosts = [
+            {
+                id: 1,
+                author: "Carlos Martínez",
+                role: "Estudiante",
+                module: "Representación de Algoritmos",
+                date: "Hace 2 horas",
+                content: "¿Alguien puede explicarme la diferencia entre un algoritmo y un diagrama de flujo? Estoy trabajando en el módulo 2 y me gustaría entender mejor cómo se relacionan estos conceptos.",
+                likes: 8,
+                replies: 3
+            },
+            {
+                id: 2,
+                author: "Profesora González",
+                role: "Profesora",
+                module: "Representación de Algoritmos",
+                date: "Hace 1 día",
+                content: "Recuerden que mañana tendremos una sesión práctica en el laboratorio de informática para trabajar con el simulador de diagramas de flujo. Por favor revisen el módulo 2 antes de la clase.",
+                likes: 15,
+                replies: 2
+            },
+            {
+                id: 3,
+                author: "Laura Méndez",
+                role: "Estudiante",
+                module: "Tipos de Lenguajes",
+                date: "Hace 3 días",
+                content: "Comparto este video que encontré sobre tipos de lenguajes de programación. Me ayudó mucho a entender las diferencias: https://ejemplo.com/video-lenguajes",
+                likes: 12,
+                replies: 5
+            }
+        ];
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Iniciar el juego de memoria
+            startGame();
+            
+            // Mostrar publicaciones del foro
+            renderForumPosts();
+            
+            // Configurar eventos para ejercicios
+            setupExercises();
+            
+            // Configurar arrastrar y soltar para el simulador
+            setupDragAndDrop();
+            
+            // Configurar el formulario del foro
+            document.getElementById('forum-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewPost();
+            });
+        });
+
+        // Funciones para el juego de memoria
+        function startGame() {
+            const gameContainer = document.getElementById('memory-game');
+            gameContainer.innerHTML = '';
+            
+            // Duplicar y mezclar las cartas
+            let cards = [...memoryCards, ...memoryCards];
+            cards.sort(() => Math.random() - 0.5);
+            
+            // Crear las cartas en el juego
+            cards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'memory-card';
+                cardElement.dataset.index = index;
+                cardElement.dataset.type = card.type;
+                cardElement.dataset.content = card.content;
+                
+                cardElement.innerHTML = '<div class="card-front">?</div><div class="card-back">' + card.type + '</div>';
+                
+                cardElement.addEventListener('click', flipCard);
+                gameContainer.appendChild(cardElement);
+            });
+            
+            document.getElementById('pairs-matched').textContent = '0';
+        }
+
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function flipCard() {
+            // Si ya hay 2 cartas volteadas o esta carta ya está volteada, no hacer nada
+            if (flippedCards.length === 2 || this.classList.contains('flipped')) {
+                return;
+            }
+            
+            // Voltear la carta
+            this.classList.add('flipped');
+            flippedCards.push(this);
+            
+            // Si hay dos cartas volteadas, comprobar si coinciden
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 500);
+            }
+        }
+
+        function checkMatch() {
+            const card1 = flippedCards[0];
+            const card2 = flippedCards[1];
+            
+            // Comprobar si las cartas coinciden (mismo tipo)
+            if (card1.dataset.type === card2.dataset.type) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                
+                document.getElementById('pairs-matched').textContent = matchedPairs;
+                
+                // Comprobar si se ha completado el juego
+                if (matchedPairs === memoryCards.length) {
+                    setTimeout(() => {
+                        alert('¡Felicidades! Has completado el juego.');
+                    }, 300);
+                }
+            } else {
+                // Si no coinciden, voltear de nuevo
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+            
+            // Reiniciar las cartas volteadas
+            flippedCards = [];
+        }
+
+        // Funciones para los ejercicios
+        function setupExercises() {
+            const options = document.querySelectorAll('.exercise-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Quitar selección de otras opciones en el mismo ejercicio
+                    const siblings = this.parentElement.children;
+                    for (let sibling of siblings) {
+                        sibling.classList.remove('selected');
+                    }
+                    
+                    // Seleccionar esta opción
+                    this.classList.add('selected');
+                });
+            });
+        }
+
+        function checkAnswers() {
+            const exercises = document.querySelectorAll('.exercise-container');
+            exercises.forEach(exercise => {
+                const selectedOption = exercise.querySelector('.exercise-option.selected');
+                const resultElement = exercise.querySelector('.exercise-result');
+                
+                if (selectedOption) {
+                    const isCorrect = selectedOption.dataset.correct === "true";
+                    
+                    if (isCorrect) {
+                        resultElement.textContent = "¡Correcto!";
+                        resultElement.className = "exercise-result correct";
+                    } else {
+                        resultElement.textContent = "Incorrecto. Intenta de nuevo.";
+                        resultElement.className = "exercise-result incorrect";
+                    }
+                } else {
+                    resultElement.textContent = "Por favor selecciona una respuesta.";
+                    resultElement.className = "exercise-result incorrect";
+                }
+            });
+        }
+
+        // Funciones para el simulador de diagramas
+        function setupDragAndDrop() {
+            const elements = document.querySelectorAll('.flowchart-element');
+            elements.forEach(element => {
+                element.addEventListener('dragstart', dragStart);
+            });
+            
+            const container = document.getElementById('flowchart-simulator');
+            container.addEventListener('dragover', dragOver);
+            container.addEventListener('drop', drop);
+        }
+
+        function dragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.className);
+            setTimeout(() => {
+                e.target.style.opacity = '0.4';
+            }, 0);
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            const data = e.dataTransfer.getData('text/plain');
+            const type = data.split(' ')[1]; // Obtener el tipo (terminal, process, decision)
+            
+            // Crear un nuevo elemento
+            const newElement = document.createElement('div');
+            newElement.className = `flowchart-element ${type}`;
+            newElement.textContent = type === 'terminal' ? (Math.random() > 0.5 ? 'Inicio' : 'Fin') : 
+                                 type === 'process' ? 'Proceso' : 'Decisión';
+            newElement.draggable = true;
+            newElement.style.left = (e.clientX - 50) + 'px';
+            newElement.style.top = (e.clientY - 50) + 'px';
+            
+            if (type === 'decision') {
+                newElement.style.transform = 'rotate(45deg)';
+                newElement.style.width = '80px';
+                newElement.style.height = '80px';
+                newElement.style.display = 'flex';
+                newElement.style.alignItems = 'center';
+                newElement.style.justifyContent = 'center';
+            }
+            
+            newElement.addEventListener('dragstart', dragStart);
+            
+            document.getElementById('flowchart-simulator').appendChild(newElement);
+        }
+
+        function addElement(type) {
+            const container = document.getElementById('flowchart-simulator');
+            const element = document.createElement('div');
+            element.className = `flowchart-element ${type}`;
+            
+            if (type === 'terminal') {
+                element.textContent = Math.random() > 0.5 ? 'Inicio' : 'Fin';
+            } else if (type === 'process') {
+                element.textContent = 'Proceso';
+            } else if (type === 'decision') {
+                element.textContent = 'Decisión';
+                element.style.transform = 'rotate(45deg)';
+                element.style.width = '80px';
+                element.style.height = '80px';
+                element.style.display = 'flex';
+                element.style.alignItems = 'center';
+                element.style.justifyContent = 'center';
+            }
+            
+            // Posición aleatoria dentro del contenedor
+            const containerRect = container.getBoundingClientRect();
+            const maxX = containerRect.width - 100;
+            const maxY = containerRect.height - 100;
+            
+            const posX = Math.floor(Math.random() * maxX);
+            const posY = Math.floor(Math.random() * maxY);
+            
+            element.style.left = posX + 'px';
+            element.style.top = posY + 'px';
+            element.draggable = true;
+            element.addEventListener('dragstart', dragStart);
+            
+            container.appendChild(element);
+        }
+
+        function resetSimulator() {
+            const container = document.getElementById('flowchart-simulator');
+            // Mantener los elementos iniciales
+            const initialElements = container.querySelectorAll('.flowchart-element');
+            initialElements.forEach(el => {
+                if (!el.draggable) {
+                    el.remove();
+                }
+            });
+            
+            // Quitar todos los elementos añadidos
+            const addedElements = container.querySelectorAll('.flowchart-element:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4))');
+            addedElements.forEach(el => el.remove());
+        }
+
+        // Funciones para el foro
+        function renderForumPosts() {
+            const postsContainer = document.getElementById('forum-posts');
+            postsContainer.innerHTML = '';
+            
+            forumPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                
+                // Generar avatar con iniciales
+                const initials = post.author.split(' ').map(n => n[0]).join('');
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="avatar">${initials}</div>
+                            <div class="post-author-info">
+                                <h5>${post.author}</h5>
+                                <small>${post.role}</small>
+                            </div>
+                        </div>
+                        <div class="post-date">${post.date}</div>
+                    </div>
+                    <div class="post-content">
+                        <p><strong>Módulo:</strong> ${post.module}</p>
+                        <p>${post.content}</p>
+                    </div>
+                    <div class="post-actions">
+                        <button><i class="fas fa-thumbs-up"></i> Me gusta (${post.likes})</button>
+                        <button><i class="fas fa-comment"></i> Responder (${post.replies})</button>
+                    </div>
+                `;
+                
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        function addNewPost() {
+            const name = document.getElementById('nombre').value;
+            const module = document.getElementById('modulo').options[document.getElementById('modulo').selectedIndex].text;
+            const message = document.getElementById('mensaje').value;
+            
+            const newPost = {
+                id: forumPosts.length + 1,
+                author: name,
+                role: "Estudiante",
+                module: module,
+                date: "Hace unos momentos",
+                content: message,
+                likes: 0,
+                replies: 0
+            };
+            
+            forumPosts.unshift(newPost); // Añadir al principio
+            renderForumPosts();
+            
+            // Limpiar el formulario
+            document.getElementById('forum-form').reset();
+            
+            // Desplazarse al nuevo post
+            document.getElementById('forum-posts').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Cambiar clase activa en navegación
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
